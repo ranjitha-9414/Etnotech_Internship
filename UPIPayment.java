@@ -1,5 +1,5 @@
 import java.util.UUID;
-public class UPIPayment implements Payment{
+public class UPIPayment extends Payment{
     @Override
     public void pay(double amount){
         String transactionId=UUID.randomUUID().toString();

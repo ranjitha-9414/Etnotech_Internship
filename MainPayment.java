@@ -14,7 +14,7 @@ public class MainPayment {
             System.out.println("Invalid Amount");
             return;
         }
-        Payment payment=null;
+        Payment payment;
         switch (choice) {
             case 1:
                 payment=new CreditCardPayment();
@@ -31,9 +31,9 @@ public class MainPayment {
                 sc.close();
                 return;
         }
-        if(payment!=null){
+        
             payment.pay(amount);
-        }
+        
         sc.close();
     }
     

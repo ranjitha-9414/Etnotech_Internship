@@ -1,5 +1,5 @@
 import java.util.UUID;
-public class NetBankingPayment implements Payment{
+public class NetBankingPayment extends Payment{
     @Override
     public void pay(double amount) {
         String transactionId = UUID.randomUUID().toString();

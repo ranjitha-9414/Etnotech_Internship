@@ -1,6 +1,6 @@
 
 import java.util.UUID;//Universally Unique Identifier
-public class CreditCardPayment implements Payment{
+public class CreditCardPayment extends Payment{
     @Override
     public void pay(double amount){
         String transactionId=UUID.randomUUID().toString();
