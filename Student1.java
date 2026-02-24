@@ -14,6 +14,7 @@ public class Student1 {
                 sc.nextLine();
                  total_marks +=marks[i];
             }
+
             System.out.println(total_marks);
             for( i=0;i<students.length;i++){
                 if(marks[i]<=100 &&marks[i]>=90){

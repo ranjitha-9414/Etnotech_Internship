@@ -13,7 +13,7 @@ public class TaxiManager {
         }
     }
 
-    public void bookTaxi(char from, char to) {
+    public void bookTaxi(char from, char to) throws TaxiNotAvailableException{
         if (from == to) {
             System.out.println("Pickup and Drop locations cannot be same!");
             return;
@@ -32,8 +32,9 @@ public class TaxiManager {
         }
 
         if (assignedTaxi == null) {
-            System.out.println("No taxis available!");
-            return;
+            throw new TaxiNotAvailableException("All taxis are busy!");
+            
+           
         }
 
         int tripDistance = Math.abs(from - to) * 15;

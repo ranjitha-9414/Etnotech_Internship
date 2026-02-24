@@ -23,14 +23,23 @@ public class Main {
             switch (choice) {
 
                 case 1:
-                    System.out.print("Enter pickup point (A-E): ");
-                    char from = scanner.next().toUpperCase().charAt(0);
 
-                    System.out.print("Enter drop point (A-E): ");
-                    char to = scanner.next().toUpperCase().charAt(0);
+                        try {
 
-                    service.bookTaxi(from, to);
-                    break;
+                            System.out.print("Enter Pickup Point: ");
+                            char from = scanner.next().charAt(0);
+
+                            System.out.print("Enter Drop Point: ");
+                            char to = scanner.next().charAt(0);
+
+                            service.bookTaxi(from, to);
+
+                        }
+                        catch(TaxiNotAvailableException e){
+                            System.out.println(e.getMessage());
+                        }
+
+                        break;
 
                 case 2:
                     service.viewBookings();
