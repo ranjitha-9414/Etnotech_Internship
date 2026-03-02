@@ -1,0 +1,80 @@
+CREATE DATABASE Hospital;
+USE Hospital;
+SHOW DATABASES;
+CREATE TABLE Department(
+    dept_id INT PRIMARY KEY AUTO_INCREMENT,
+    dept_name VARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE Doctor(
+    dr_id INT PRIMARY KEY AUTO_INCREMENT,
+    dr_name VARCHAR(100) NOT NULL,
+    specialization VARCHAR(100),
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES Department(dept_id)
+);
+
+
+CREATE TABLE Patient(
+    patient_id INT PRIMARY KEY AUTO_INCREMENT,
+    patient_name VARCHAR(100) NOT NULL,
+    age INT,
+    gender VARCHAR(10),
+    phone_number VARCHAR(25)
+);
+ALTER TABLE Patient
+MODIFY phone_number VARCHAR(25);
+
+CREATE TABLE Appointment(
+    appointment_id INT PRIMARY KEY AUTO_INCREMENT,
+    patient_id INT,
+    dr_id INT,
+    appointment_date DATETIME,
+    status VARCHAR(20),
+    FOREIGN KEY(patient_id) REFERENCES Patient(patient_id),
+    FOREIGN KEY(dr_id) REFERENCES Doctor(dr_id)
+);
+INSERT INTO DEPARTMENT VALUES
+(1,"Cardiology"),
+(2,"Neurology"),
+(3,"Nephrology");
+INSERT INTO Doctor VALUES
+(1,"Rahul","Nephrologist",3),
+(2,"Arjun","Neurologist",2),
+(3,"Anjali","Cardiologist",1);
+
+INSERT INTO Patient VALUES
+(1,"Raj",21,"Male","91+ 799186457910"),
+(2,"Ram",20,"Male","91+ 7991864510"),
+(3,"Rajini",21,"Female","91+ 9980338390");
+
+INSERT INTO Appointment VALUES
+(1,2,1,'2026-02-24',"completed"),
+(2,1,1,'2026-02-25',"Pending"),
+(3,2,3,'2026-02-24',"In progress"),
+(4,3,2,'2026-02-17',"completed");
+
+SELECT A.appointment_id,a.patient_id,P.patient_name,appointment_date,status
+FROM Appointment a
+JOIN Patient P ON P.patient_id=a.patient_id
+JOIN Doctor D ON D.dr_id=a.dr_id
+WHERE DR_name="Rahul";
+
+SELECT dept_name, COUNT(patient_id)
+FROM Department 
+JOIN Doctor  ON Doctor.dept_id=Department.dept_id
+JOIN Appointment ON Appointment.dr_id = Doctor.dr_id
+GROUP BY dept_name;
+
+SELECT  appointment_id,patient_id,dr_id,appointment_date
+FROM Appointment
+WHERE appointment_date > NOW()
+ORDER BY appointment_date;
+
+
+
+
+
+
+
