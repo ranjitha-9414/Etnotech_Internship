@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Feedback Form</title>
+</head>
+<body>
+
+    <center>
+        <h1>Customer Feedback Form</h1>
+        <p>We value your feedback. Please fill out the form below.</p>
+    </center>
+
+    <form>
+
+        <center>
+        <table border="0" width="600">
+
+            <!-- Personal Info -->
+            <tr>
+                <td colspan="2"><h3>Personal Information</h3></td>
+            </tr>
+
+            <tr>
+                <td>Full Name:</td>
+                <td><input type="text" name="name" size="40" required></td>
+            </tr>
+
+            <tr>
+                <td>Email:</td>
+                <td><input type="email" name="email" size="40" required></td>
+            </tr>
+
+            <tr>
+                <td>Phone:</td>
+                <td><input type="tel" name="phone" size="40"></td>
+            </tr>
+
+            <!-- Feedback -->
+            <tr>
+                <td colspan="2"><h3>Feedback Details</h3></td>
+            </tr>
+
+            <tr>
+                <td>Category:</td>
+                <td>
+                    <select name="category">
+                        <option>--Select--</option>
+                        <option>Service</option>
+                        <option>Website</option>
+                        <option>Support</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Rating:</td>
+                <td>
+                    <input type="radio" name="rating"> Excellent
+                    <input type="radio" name="rating"> Good
+                    <input type="radio" name="rating"> Average
+                    <input type="radio" name="rating"> Poor
+                </td>
+            </tr>
+
+            <tr>
+                <td>Recommend:</td>
+                <td>
+                    <input type="radio" name="rec"> Yes
+                    <input type="radio" name="rec"> No
+                </td>
+            </tr>
+
+            <tr>
+                <td>Feedback:</td>
+                <td>
+                    <textarea rows="5" cols="38"></textarea>
+                </td>
+            </tr>
+
+            <!-- Submit -->
+            <tr>
+                <td colspan="2">
+                    <input type="checkbox"> I agree to terms<br><br>
+
+                    <center>
+                        <input type="submit" value="Submit">
+                        <input type="reset" value="Clear">
+                    </center>
+                </td>
+            </tr>
+
+        </table>
+        </center>
+
+    </form>
+
+</body>
+</html>

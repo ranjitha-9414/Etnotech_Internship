@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <h2>Create Account 🚀</h2>
+
+        <input id="username" placeholder="Username">
+        <input type="email" id="email" placeholder="Email">
+        <input id="password" type="password" placeholder="Password">
+
+        <button onclick="register()">Register</button>
+
+        <p>Already have account? <a href="login.html">Login</a></p>
+        <p id="msg"></p>
+    </div>
+
+</div>
+<script src="app.js"></script>
+<script>
+document.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", function(e) {
+        const circle = document.createElement("span");
+        circle.classList.add("ripple");
+
+        circle.style.left = e.offsetX + "px";
+        circle.style.top = e.offsetY + "px";
+
+        this.appendChild(circle);
+
+        setTimeout(() => circle.remove(), 600);
+    });
+});
+</script>
+<script src="register.js"></script>
+</body>
+</html>

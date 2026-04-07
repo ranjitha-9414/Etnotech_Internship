@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Code Editor</title>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Monaco -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.43.0/min/vs/loader.min.js"></script>
+</head>
+
+<body>
+
+<nav>
+    <h2>Code Editor</h2>
+    <div>
+        <a href="problems.html">Problems</a>
+        <a href="submissions.html">Submissions</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <button onclick="logout()">Logout</button>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- Problem -->
+    <div class="card">
+        <h2 id="problemTitle"></h2>
+        <p id="problemDesc"></p>
+    </div>
+
+    <!-- Sample -->
+    <div class="card">
+        <h3>Sample Input</h3>
+        <pre id="sampleInput"></pre>
+    </div>
+
+    <div class="card">
+        <h3>Sample Output</h3>
+        <pre id="sampleOutput"></pre>
+    </div>
+
+    <!-- Editor -->
+    <div class="card">
+        <h3>Code</h3>
+        <div id="editor" style="height:400px;"></div>
+    </div>
+
+    <div class="card">
+        <h3>Custom Input</h3>
+        <textarea id="input"></textarea>
+    </div>
+
+    <div style="text-align:center;">
+        <button onclick="runCode()">Run</button>
+        <button onclick="submitCode()">Submit</button>
+    </div>
+
+    <div class="card">
+        <h3>Output</h3>
+        <pre id="output"></pre>
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+<!-- MONACO -->
+<script>
+let editor;
+function getDefaultCode() {
+    return `import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Write your code here
+        
+        
+    }
+}`;
+}
+require.config({
+    paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.43.0/min/vs' }
+});
+
+require(['vs/editor/editor.main'], function () {
+
+    editor = monaco.editor.create(document.getElementById('editor'), {
+        value: "",
+        language: 'java',
+        theme: 'vs-dark',
+        automaticLayout: true
+    });
+
+    // 🔥 AUTO SAVE PER PROBLEM
+    editor.onDidChangeModelContent(() => {
+        let pid = localStorage.getItem("problemId");
+        localStorage.setItem("code_" + pid, editor.getValue());
+    });
+
+});
+</script>
+
+<!-- PAGE LOAD -->
+<script>
+window.addEventListener("load", function () {
+
+    let pid = localStorage.getItem("problemId");
+
+    if (!pid) {
+        alert("Select problem first");
+        window.location.href = "problems.html";
+        return;
+    }
+
+    // load problem
+    loadProblemDetails();
+
+    // load saved code per problem
+    setTimeout(() => {
+        let saved = localStorage.getItem("code_" + pid);
+        if (saved && editor) {
+            editor.setValue(saved);
+        }
+    }, 300);
+
+});
+</script>
+
+</body>
+</html>

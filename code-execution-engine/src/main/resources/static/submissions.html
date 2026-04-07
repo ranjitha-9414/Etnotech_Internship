@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My Submissions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <h2>📜 My Submissions</h2>
+    <div>
+        <a href="problems.html">Problems</a>
+        <a href="editor.html">Editor</a>
+        <button onclick="logout()">Logout</button>
+    </div>
+</nav>
+
+<div class="container">
+
+<h3>Submission History</h3>
+
+<div id="submissionList"></div>
+
+</div>
+<div id="popup" style="
+    display:none;
+    position:fixed;
+    top:10%;
+    left:20%;
+    width:60%;
+    background:#ffffff;
+    color:#000000; /* 🔥 ADD THIS */
+    border-radius:10px;
+    padding:20px;
+    z-index:1000;
+">
+
+
+    <h2>Submission Details</h2>
+
+    <pre id="popupContent" style="
+    background:#0f172a;   /* dark background */
+    color:#00ffcc;        /* 🔥 bright text */
+    padding:15px;
+    border-radius:10px;
+    font-size:14px;
+    overflow:auto;
+    max-height:400px;
+">
+</pre>
+    <button onclick="closePopup()">Close</button>
+</div>
+<button onclick="copyCode()" style="
+    background:#2563eb;
+    color:white;
+    padding:8px 12px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+">
+    Copy Code
+</button>
+<button onclick="runAgain()" style="
+    background:#16a34a;
+    color:white;
+    padding:8px 12px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    margin-left:10px;
+">
+    Run Again
+</button>
+<script src="app.js"></script>
+
+<div id="submissionList"></div>
+
+
+
+<script>
+window.onload = function() {
+    loadSubmissions();
+};
+</script>
+<script>
+document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("mousemove", e => {
+        let x = (e.offsetX / card.offsetWidth - 0.5) * 10;
+        let y = (e.offsetY / card.offsetHeight - 0.5) * 10;
+
+        card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+        card.style.transform = "rotateY(0) rotateX(0)";
+    });
+});
+</script>                                          m
+</body>
+</html>

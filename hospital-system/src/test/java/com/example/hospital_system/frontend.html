@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital System</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f0f4f8;
+        }
+
+        .container-box {
+            max-width: 450px;
+            margin: 60px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .back-arrow {
+            cursor: pointer;
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .card-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .status-booked { color: orange; }
+        .status-completed { color: green; }
+        .status-cancelled { color: red; }
+    </style>
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script>
+
+let token = null;
+let role = null;
+let selectedDoctorId = null;
+
+// ---------- UI RENDER ----------
+function render(content) {
+    document.getElementById("app").innerHTML = `
+        ${token ? `<div class="header"><h4>🏥 Hospital System</h4></div>` : ""}
+        <div class="container-box">${content}</div>
+    `;
+}
+
+// ---------- REGISTER ----------
+function showRegister() {
+    render(`
+        <h3>Register</h3>
+
+        <select id="role" class="form-control mb-2">
+            <option value="PATIENT">Patient</option>
+            <option value="DOCTOR">Doctor</option>
+        </select>
+
+        <input id="name" class="form-control mb-2" placeholder="Name">
+        <input id="email" class="form-control mb-2" placeholder="Email">
+        <input id="password" type="password" class="form-control mb-2" placeholder="Password">
+
+        <button class="btn btn-success w-100" onclick="register()">Register</button>
+        <button class="btn btn-link w-100" onclick="showLogin()">Login</button>
+    `);
+}
+
+async function register() {
+    await fetch("http://localhost:8081/api/register", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+            name: name.value,
+            email: email.value,
+            password: password.value,
+            role: role.value
+        })
+    });
+
+    alert("Registered!");
+    showLogin();
+}
+
+// ---------- LOGIN ----------
+function showLogin() {
+    render(`
+        <h3>Login</h3>
+        <input id="email" class="form-control mb-2" placeholder="Email">
+        <input id="password" type="password" class="form-control mb-2" placeholder="Password">
+
+        <button class="btn btn-primary w-100" onclick="login()">Login</button>
+        <button class="btn btn-link w-100" onclick="showRegister()">Register</button>
+    `);
+}
+
+async function login() {
+    let res = await fetch("http://localhost:8081/api/login", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+            email: email.value,
+            password: password.value
+        })
+    });
+
+    token = await res.text();
+
+    let payload = JSON.parse(atob(token.split('.')[1]));
+    role = payload.role;
+
+    if (role === "DOCTOR") showDoctorDashboard();
+    else showPatientDashboard();
+}
+
+// ---------- PATIENT ----------
+function showPatientDashboard() {
+    render(`
+        <h4>Patient Dashboard</h4>
+
+        <button class="btn btn-info w-100 mb-2" onclick="loadDoctors()">Book Appointment</button>
+        <button class="btn btn-warning w-100 mb-2" onclick="loadMyAppointments()">My Appointments</button>
+        <button class="btn btn-danger w-100" onclick="logout()">Logout</button>
+    `);
+}
+
+// ---------- DOCTORS ----------
+async function loadDoctors() {
+    let res = await fetch("http://localhost:8081/api/doctors");
+    let data = await res.json();
+
+    let list = data.map(doc => `
+        <div class="card-item">
+            ${doc.name} - ${doc.specialization}
+            <button class="btn btn-sm btn-primary mt-2" onclick="selectDoctor(${doc.id})">Select</button>
+        </div>
+    `).join("");
+
+    render(`
+        <span class="back-arrow" onclick="showPatientDashboard()">⬅ Back</span>
+        <h4>Select Doctor</h4>
+        ${list}
+
+        <input id="date" type="date" class="form-control mt-3">
+        <button class="btn btn-success w-100 mt-2" onclick="book()">Book</button>
+    `);
+}
+
+function selectDoctor(id) {
+    selectedDoctorId = id;
+    alert("Selected");
+}
+
+async function book() {
+    await fetch("http://localhost:8081/api/appointments", {
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json",
+            "Authorization":"Bearer "+token
+        },
+        body: JSON.stringify({
+            doctorId:selectedDoctorId,
+            appointmentDate:date.value
+        })
+    });
+
+    alert("Booked!");
+    showPatientDashboard();
+}
+
+// ---------- MY APPOINTMENTS ----------
+async function loadMyAppointments() {
+    let res = await fetch("http://localhost:8081/api/appointments/my", {
+        headers:{"Authorization":"Bearer "+token}
+    });
+
+    let data = await res.json();
+
+    let list = data.map(app => `
+        <div class="card-item">
+            Doctor: ${app.doctorId}<br>
+            Date: ${app.appointmentDate}<br>
+            <span class="status-${app.status.toLowerCase()}">${app.status}</span>
+            <button class="btn btn-danger btn-sm mt-2" onclick="cancel(${app.id})">Cancel</button>
+        </div>
+    `).join("");
+
+    render(`
+        <span class="back-arrow" onclick="showPatientDashboard()">⬅ Back</span>
+        <h4>My Appointments</h4>
+        ${list || "No appointments"}
+    `);
+}
+
+async function cancel(id) {
+    await fetch(`http://localhost:8081/api/appointments/${id}`, {
+        method:"DELETE",
+        headers:{"Authorization":"Bearer "+token}
+    });
+
+    loadMyAppointments();
+}
+
+// ---------- DOCTOR ----------
+async function showDoctorDashboard() {
+    let res = await fetch("http://localhost:8081/api/appointments/doctor", {
+        headers:{"Authorization":"Bearer "+token}
+    });
+
+    let data = await res.json();
+
+    let list = data.map(app => `
+        <div class="card-item">
+            Patient: ${app.patientId}<br>
+            Date: ${app.appointmentDate}<br>
+            <span class="status-${app.status.toLowerCase()}">${app.status}</span>
+            <button class="btn btn-success btn-sm mt-2" onclick="complete(${app.id})">Complete</button>
+        </div>
+    `).join("");
+
+    render(`
+        <h4>Doctor Dashboard</h4>
+        ${list || "No appointments"}
+        <button class="btn btn-danger w-100 mt-3" onclick="logout()">Logout</button>
+    `);
+}
+
+async function complete(id) {
+    await fetch(`http://localhost:8081/api/appointments/${id}/complete`, {
+        method:"PUT",
+        headers:{"Authorization":"Bearer "+token}
+    });
+
+    showDoctorDashboard();
+}
+
+// ---------- LOGOUT ----------
+function logout() {
+    token = null;
+    role = null;
+    showLogin();
+}
+
+// START
+showRegister();
+
+</script>
+
+</body>
+</html>

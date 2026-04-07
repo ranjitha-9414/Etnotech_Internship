@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pricing Cards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            display: flex;
+            gap: 30px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 30px;
+            width: 250px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .card h2 {
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 32px;
+            margin: 15px 0;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        ul li {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+        }
+
+        /* Highlight Plan */
+        .highlight {
+            background: #667eea;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .highlight .price,
+        .highlight ul li {
+            color: white;
+        }
+
+        .highlight .btn {
+            background: white;
+            color: #667eea;
+        }
+
+        .highlight .btn:hover {
+            background: #eee;
+        }
+
+        /* Badge */
+        .badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: red;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Basic -->
+    <div class="card">
+        <h2>Basic</h2>
+        <div class="price">₹199</div>
+        <ul>
+            <li>1 Website</li>
+            <li>Basic Support</li>
+            <li>Limited Storage</li>
+        </ul>
+        <button class="btn">Choose Plan</button>
+    </div>
+
+    <!-- Standard (Highlighted) -->
+    <div class="card highlight">
+        <div class="badge">Popular</div>
+        <h2>Standard</h2>
+        <div class="price">₹499</div>
+        <ul>
+            <li>5 Websites</li>
+            <li>Priority Support</li>
+            <li>50GB Storage</li>
+        </ul>
+        <button class="btn">Choose Plan</button>
+    </div>
+
+    <!-- Premium -->
+    <div class="card">
+        <h2>Premium</h2>
+        <div class="price">₹999</div>
+        <ul>
+            <li>Unlimited Websites</li>
+            <li>24/7 Support</li>
+            <li>Unlimited Storage</li>
+        </ul>
+        <button class="btn">Choose Plan</button>
+    </div>
+
+</div>
+
+</body>
+</html>

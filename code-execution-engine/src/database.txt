@@ -1,0 +1,104 @@
+CREATE DATABASE code_engine;
+USE code_engine;
+SHOW TABLES;
+SELECT id, title FROM problem;
+SELECT * FROM problem;
+SELECT * FROM test_case_entity;
+SELECT username, password FROM users;
+DELETE FROM test_case_entity ;
+DELETE FROM problem;
+SELECT * FROM users;
+DELETE FROM submission WHERE id > 0;
+DELETE FROM problem WHERE id > 0;
+SET SQL_SAFE_UPDATES = 0;
+INSERT INTO problem (title, description)
+VALUES 
+('Sum of Two Numbers', 'Given two integers, return their sum'),
+
+('Factorial', 'Given a number n, print factorial of n'),
+
+('Reverse String', 'Given a string, print its reverse');
+INSERT INTO test_case_entity (input, expected_output, problem_id)
+VALUES 
+('5 10', '15', 5),
+('2 3', '5', 5);
+
+INSERT INTO test_case_entity (input, expected_output, problem_id)
+VALUES ('3', '6', 7);
+
+INSERT INTO test_case_entity (input, expected_output, problem_id)
+VALUES ('0', '1', 6);
+UPDATE problem 
+SET sample_input = '5 10', sample_output = '15'
+WHERE title = 'Sum of Two Numbers';
+
+UPDATE problem 
+SET sample_input = '5', sample_output = '120'
+WHERE title = 'Factorial';
+
+UPDATE problem 
+SET sample_input = 'hello', sample_output = 'olleh'
+WHERE title = 'Reverse String';
+UPDATE problem 
+SET sample_input = '5 10',
+    sample_output = '15'
+WHERE title = 'Sum of Two Numbers';
+
+UPDATE problem 
+SET sample_input = '5',
+    sample_output = '120'
+WHERE title = 'Factorial';
+
+UPDATE problem 
+SET sample_input = 'hello',
+    sample_output = 'olleh'
+WHERE title = 'Reverse String';
+UPDATE problem 
+SET difficulty = 'EASY'
+WHERE title = 'Sum of Two Numbers';
+
+UPDATE problem 
+SET difficulty = 'MEDIUM'
+WHERE title = 'Factorial';
+
+UPDATE problem 
+SET difficulty = 'EASY'
+WHERE title = 'Reverse String';
+SELECT * FROM test_case_entity WHERE problem_id = 5;
+SELECT id, problem_id FROM submission;
+ALTER TABLE test_case_entity ADD COLUMN is_sample BOOLEAN DEFAULT FALSE;
+ALTER TABLE test_case_entity DROP COLUMN is_sample;
+SELECT input, is_sample FROM test_case_entity;
+DELETE FROM test_case_entity;
+DELETE u1
+FROM users u1
+JOIN users u2
+ON u1.username = u2.username
+AND u1.id > u2.id
+WHERE u1.id IS NOT NULL;
+ALTER TABLE users ADD CONSTRAINT unique_username UNIQUE (username);
+SELECT u.username, s.*
+FROM submission s
+JOIN users u ON s.user_id = u.id;
+SELECT username, email,password FROM users;
+ALTER TABLE users ADD COLUMN email VARCHAR(255);
+ALTER TABLE users ADD COLUMN reset_token VARCHAR(255);
+UPDATE users 
+SET email = 'ranjitha@gmail.com' 
+WHERE username = 'ranjitha';
+
+UPDATE users 
+SET email = 'virat@gmail.com' 
+WHERE username = 'virat';
+
+UPDATE users 
+SET email = 'kohli@gmail.com' 
+WHERE username = 'kohli';
+SELECT input, expected_output, sample FROM test_case_entity;
+UPDATE test_case_entity
+SET sample = 1
+WHERE id = 5;
+DESC test_case_entity;
+ALTER TABLE test_case_entity 
+MODIFY sample BOOLEAN;
+UPDATE test_case_entity SET sample = 1;
