@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Alarm Clock</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- TOP BUTTONS -->
+  <div class="top-buttons">
+    <button id="themeToggle">🌙</button>
+    <button id="formatToggle">Switch to 24H</button>
+  </div>
+
+  <!-- CLOCK -->
+  <div class="clock-box">
+    <div id="greeting">Hello 👋</div>
+    <div id="time">00:00:00</div>
+    <div id="date">Loading...</div>
+  </div>
+
+  <!-- TIMEZONES -->
+  <div class="timezone-container">
+
+    <div class="timezone">
+      <img src="https://flagcdn.com/w40/in.png">
+      <h3>India</h3>
+      <p id="indiaTime"></p>
+    </div>
+
+    <div class="timezone">
+      <img src="https://flagcdn.com/w40/us.png">
+      <h3>New York</h3>
+      <p id="nyTime"></p>
+    </div>
+
+    <div class="timezone">
+      <img src="https://flagcdn.com/w40/gb.png">
+      <h3>London</h3>
+      <p id="londonTime"></p>
+    </div>
+
+  </div>
+
+  <!-- ALARM -->
+  <div class="alarm-box">
+    <h3>Set Alarm ⏰</h3>
+
+    <input type="time" id="alarmTime">
+    <button id="setAlarmBtn">Set Alarm</button>
+
+    <p id="alarmStatus">No alarm set</p>
+
+    <!-- SOUND -->
+    <div class="sound-section">
+      <select id="soundSelect">
+        <option value="default">Default Beep</option>
+        <option value="bell">Bell 🔔</option>
+        <option value="alarm">Classic Alarm ⏰</option>
+      </select>
+
+      <input type="file" id="customSound" accept="audio/*">
+
+      <!-- VOLUME -->
+      <div>
+        <label>Volume 🔊</label><br>
+        <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1">
+      </div>
+
+      <!-- PREVIEW -->
+      <button id="previewSound">Preview ▶️</button>
+    </div>
+
+    <!-- CONTROLS -->
+    <div id="alarmControls" style="display:none;">
+      <button id="stopAlarm">Stop</button>
+      <button id="snoozeAlarm">Snooze</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

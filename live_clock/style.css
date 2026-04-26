@@ -1,0 +1,178 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* BODY */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+}
+
+/* CONTAINER */
+.container {
+  width: 90%;
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+/* TOP BUTTONS */
+.top-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.top-buttons button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: #1e293b;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.top-buttons button:hover {
+  background: #334155;
+}
+
+/* CLOCK */
+.clock-box {
+  padding: 30px;
+  border-radius: 16px;
+  background: #1e293b;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  margin-bottom: 20px;
+}
+
+#greeting {
+  color: #facc15;
+  margin-bottom: 5px;
+}
+
+#time {
+  font-size: 52px;
+  margin: 10px 0;
+  color: #38bdf8;
+}
+
+#date {
+  color: #94a3b8;
+}
+
+/* TIMEZONES */
+.timezone-container {
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.timezone {
+  flex: 1;
+  background: #1e293b;
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+  transition: 0.2s;
+}
+
+.timezone:hover {
+  transform: translateY(-3px);
+}
+
+.timezone img {
+  width: 25px;
+  margin-bottom: 5px;
+}
+
+.timezone p {
+  margin-top: 5px;
+  color: #38bdf8;
+}
+
+/* ALARM */
+.alarm-box {
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* INPUT */
+.alarm-box input,
+.alarm-box button {
+  margin: 5px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+}
+
+/* BUTTONS */
+.alarm-box button {
+  background: #6366f1;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.alarm-box button:hover {
+  background: #4f46e5;
+}
+
+/* STATUS */
+#alarmStatus {
+  margin: 10px 0;
+  color: #94a3b8;
+}
+
+/* SOUND */
+.sound-section {
+  margin-top: 15px;
+}
+
+.sound-section select,
+.sound-section input {
+  margin: 5px;
+  padding: 6px;
+  border-radius: 5px;
+}
+
+/* PREVIEW */
+#previewSound {
+  margin-top: 10px;
+  background: #6366f1;
+}
+
+/* CONTROLS */
+#alarmControls {
+  margin-top: 15px;
+}
+
+#stopAlarm {
+  background: #ef4444;
+}
+
+#snoozeAlarm {
+  background: #22c55e;
+}
+
+/* LIGHT MODE */
+body.light {
+  background: linear-gradient(135deg, #e0f2fe, #ffffff);
+  color: black;
+}
+
+body.light .clock-box,
+body.light .timezone,
+body.light .alarm-box {
+  background: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}

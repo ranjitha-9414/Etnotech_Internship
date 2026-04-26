@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+}
+
+.card {
+  background: #1e293b;
+  padding: 30px;
+  border-radius: 20px;
+  width: 360px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+/* Dropdown */
+#userSelect {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background: #334155;
+  color: white;
+}
+
+/* Toggle */
+.toggle {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.toggle button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  background: #334155;
+  color: white;
+}
+
+.toggle .active {
+  background: #6366f1;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #334155;
+  color: white;
+}
+
+/* Button */
+#calculateBtn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #6366f1;
+  color: white;
+  cursor: pointer;
+}
+
+/* Result */
+.result {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#bmiValue {
+  font-size: 40px;
+}
+
+/* Chart */
+#bmiChart {
+  margin-top: 20px;
+  background: #111827;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* History */
+#historyList {
+  margin-top: 15px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+#historyList li {
+  background: #334155;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 5px;
+}
+
+/* Colors */
+.under { color: #38bdf8; }
+.normal { color: #22c55e; }
+.over { color: #facc15; }
+.obese { color: #ef4444; }

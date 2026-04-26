@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BMI Pro Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+
+    <h1>🏋️ BMI Tracker Pro</h1>
+
+    <!-- Username -->
+    <input type="text" id="username" placeholder="Enter your name">
+
+    <!-- User Dropdown -->
+    <select id="userSelect">
+      <option value="">Select User</option>
+    </select>
+
+    <!-- Toggle -->
+    <div class="toggle">
+      <button id="metricBtn" class="active">Metric</button>
+      <button id="imperialBtn">Imperial</button>
+    </div>
+
+    <!-- Metric -->
+    <div id="metricInputs">
+      <input type="number" id="heightCm" placeholder="Height (cm)">
+      <input type="number" step="0.01" id="heightM" placeholder="Height (m)">
+    </div>
+
+    <!-- Imperial -->
+    <div id="imperialInputs" style="display:none;">
+      <input type="number" id="feet" placeholder="Feet">
+      <input type="number" id="inches" placeholder="Inches">
+    </div>
+
+    <input type="number" id="weight" placeholder="Weight">
+    <button id="calculateBtn">Calculate BMI</button>
+
+    <!-- Result -->
+    <div class="result">
+      <h2 id="bmiValue">--</h2>
+      <p id="status">Enter details</p>
+    </div>
+
+    <!-- AI Feedback -->
+    <div id="feedback"></div>
+
+    <!-- Chart -->
+    <canvas id="bmiChart"></canvas>
+
+    <!-- History -->
+    <ul id="historyList"></ul>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

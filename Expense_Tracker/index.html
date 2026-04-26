@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Finance Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>💰 Finance</h2>
+    <ul id="menu">
+      <li class="active" data-page="dashboardPage">Dashboard</li>
+      <li data-page="transactionsPage">Transactions</li>
+      <li data-page="analyticsPage">Analytics</li>
+      <li data-page="settingsPage">Settings</li>
+    </ul>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <div class="header">
+      <h1 id="pageTitle">Dashboard</h1>
+      <button id="addBtn">+ Add</button>
+    </div>
+
+    <!-- DASHBOARD -->
+    <section id="dashboardPage" class="page">
+      <div class="cards">
+        <div class="card balance">
+          <p>Balance</p>
+          <h2 id="balance">₹0</h2>
+        </div>
+        <div class="card income">
+          <p>Income</p>
+          <h2 id="income">₹0</h2>
+        </div>
+        <div class="card expense">
+          <p>Expense</p>
+          <h2 id="expense">₹0</h2>
+        </div>
+      </div>
+
+      <div class="chart-box">
+        <canvas id="chart"></canvas>
+      </div>
+
+      <div class="quick-stats">
+        <div class="mini-card" id="lastExpense">Last Expense</div>
+        <div class="mini-card" id="maxIncome">Highest Income</div>
+        <div class="mini-card" id="monthTotal">This Month</div>
+      </div>
+    </section>
+
+    <!-- TRANSACTIONS -->
+    <section id="transactionsPage" class="page hidden">
+      <div class="transactions">
+        <h3>All Transactions</h3>
+        <ul id="list"></ul>
+      </div>
+    </section>
+
+    <!-- ANALYTICS -->
+    <section id="analyticsPage" class="page hidden">
+      <div class="chart-box">
+        <canvas id="analyticsChart"></canvas>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="settingsPage" class="page hidden">
+      <h3>Settings</h3>
+      <button onclick="resetApp()">Reset Data</button>
+    </section>
+
+  </main>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Add Transaction</h3>
+    <form id="form">
+      <input type="text" id="text" placeholder="Description" required>
+      <input type="number" id="amount" placeholder="Amount (+/-)" required>
+      <button type="submit">Add</button>
+    </form>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

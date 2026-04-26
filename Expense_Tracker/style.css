@@ -1,0 +1,155 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #0f172a;
+  color: white;
+}
+
+/* Layout */
+.dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #111827;
+  padding: 20px;
+}
+
+.sidebar li {
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.sidebar li.active,
+.sidebar li:hover {
+  background: #1f2937;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* Cards */
+.cards {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.card {
+  flex: 1;
+  padding: 20px;
+  border-radius: 15px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.balance { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.income { background: linear-gradient(135deg, #22c55e, #4ade80); }
+.expense { background: linear-gradient(135deg, #ef4444, #f87171); }
+
+/* Chart */
+.chart-box {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 15px;
+  height: 300px;
+  margin-bottom: 20px;
+}
+
+canvas {
+  max-height: 250px !important;
+}
+
+/* Quick stats */
+.quick-stats {
+  display: flex;
+  gap: 10px;
+}
+
+.mini-card {
+  flex: 1;
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+/* Transactions */
+.transactions {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.transactions li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.plus { color: #22c55e; }
+.minus { color: #ef4444; }
+
+/* Pages */
+.hidden {
+  display: none;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+}
+
+.modal input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+.modal button {
+  width: 100%;
+  padding: 10px;
+  background: #6366f1;
+  border: none;
+  color: white;
+  border-radius: 8px;
+}
